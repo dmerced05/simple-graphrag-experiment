@@ -1,14 +1,69 @@
-# Simple local GraphRAG
+# Simple GraphRAG Experiment
 
-A minimal GraphRAG demo that runs entirely on your machine. It reads documents, uses a local LLM to extract entities and relationships into a knowledge graph, compiles that graph into an OKF Markdown wiki, and answers questions three ways so you can compare them:
+A local, hands-on playground for comparing ways of doing retrieval-augmented generation (RAG): plain vector search, a knowledge graph, and a compiled Markdown wiki in the Open Knowledge Format (OKF). Everything runs on your own machine with Ollama models.
+
+## How to run
+
+### 1. Install
+
+1. **Ollama:** install it from [ollama.com](https://ollama.com) and open it, so it runs in the background.
+2. **Models:** pull the chat model and the embedding model:
+   ```bash
+   ollama pull qwen2.5:7b
+   ollama pull nomic-embed-text
+   ```
+   `qwen2.5:7b` needs about 8 GB of free RAM. On a smaller machine, pull `qwen2.5:3b` and run `export CHAT_MODEL=qwen2.5:3b` (Windows PowerShell: `$env:CHAT_MODEL="qwen2.5:3b"`). Any chat model that can output JSON works.
+3. **Python packages** (Python 3.10+), from the project folder:
+   ```bash
+   python -m venv .venv
+   source .venv/bin/activate        # Windows: .venv\Scripts\activate
+   pip install -r requirements.txt
+   pip install ipykernel pandas matplotlib   # only for the notebook in testing/
+   ```
+
+### 2. Build the index and ask questions
+
+```bash
+python graphrag.py index      # chunk, extract, build the graph, embed, write the wiki (about 1-2 min)
+python graphrag.py stats      # what got extracted
+
+python graphrag.py ask "Who leads the Beacon team?" --mode vector
+python graphrag.py ask "Who leads the Beacon team?" --mode graph
+python graphrag.py ask "Who leads the Beacon team?" --mode wiki
+```
+
+Add `--show-context` to see exactly what was retrieved, and `--timing` for latency and token counts. Run `ask` with no question for interactive mode. Extractions are cached in `index/extractions.json`, so re-running `index` only processes new or changed chunks.
+
+The repo includes a prebuilt `index/` and `wiki/`, so you can run `ask` right away and rebuild later.
+
+### 3. Compare the three modes
+
+```bash
+python graphrag.py bench --retrieval-only    # fast: retrieval speed and evidence recall
+python graphrag.py bench                     # full: accuracy, latency, tokens (about 10-15 min)
+```
+
+### 4. Run the tests
+
+```bash
+python -m pytest testing     # about a second; no Ollama needed
+```
+
+For a guided walkthrough, open `testing/bench.ipynb` and run it section by section. If something goes wrong, see [Troubleshooting](#troubleshooting).
+
+## About this project
+
+This is a learning project: a hands-on way to see how RAG systems actually behave by building the pieces myself and measuring them, instead of treating a framework as a black box. It runs entirely on local Ollama models, so every step can be inspected: which chunks were created, what the model extracted, what got retrieved, and how many tokens and milliseconds each answer cost.
+
+The same questions are answered three ways:
 
 | Mode | What goes into the prompt |
 | --- | --- |
-| `vector` | The 3 chunks most similar to the question (plain RAG baseline) |
-| `graph` | Facts from walking the knowledge graph, plus the related source chunks |
-| `wiki` | Compiled wiki pages only, packed into a fixed token budget (no raw text) |
+| `vector` | The 3 chunks most similar to the question (the plain RAG baseline) |
+| `graph` | Facts from walking a knowledge graph of extracted entities and relations, plus the source chunks they came from |
+| `wiki` | Pages from a Markdown wiki compiled from the graph in the [Open Knowledge Format](https://github.com/GoogleCloudPlatform/knowledge-catalog/tree/main/okf), packed into a fixed token budget, with no raw text |
 
-The only external service is **Ollama**. Everything else is a Python library.
+The sample corpus is tiny (three short files about a fictional company), so the results are directional, not conclusions. The goal is understanding the trade-offs, not producing a production system.
 
 ## Project files
 
@@ -43,49 +98,7 @@ index/                 # built by `index`: graph, chunks, embeddings, extraction
 wiki/                  # built by `index` / `export-okf`: the OKF wiki
 ```
 
-To experiment with one step, like trying a different chunking strategy, edit that step's file. Everything else stays the same. The chunking file is named `chunking.py` rather than `chunk.py` because Python's standard library already has a module called `chunk`, and Jupyter can load that one instead.
-
-## Setup (once)
-
-1. **Install Ollama** from [ollama.com](https://ollama.com) and open it, so it runs in the background.
-2. **Pull the two models** in a terminal:
-   ```bash
-   ollama pull qwen2.5:7b
-   ollama pull nomic-embed-text
-   ```
-   `qwen2.5:7b` needs about 8 GB of free RAM. On a smaller machine, pull `qwen2.5:3b` instead and run `export CHAT_MODEL=qwen2.5:3b` (Windows PowerShell: `$env:CHAT_MODEL="qwen2.5:3b"`). Any chat model that handles JSON output works.
-3. **Install Python packages** (Python 3.10+):
-   ```bash
-   python -m venv .venv
-   source .venv/bin/activate        # Windows: .venv\Scripts\activate
-   pip install -r requirements.txt
-   pip install ipykernel pandas matplotlib   # only needed for testing/bench.ipynb
-   ```
-
-## Quick start
-
-Run these from the project folder, with Ollama open.
-
-```bash
-# 1. build everything: graph, embeddings and the wiki (one LLM call per chunk, about 1-2 min)
-python graphrag.py index
-
-# 2. see what got extracted
-python graphrag.py stats
-
-# 3. ask the same question in each mode
-python graphrag.py ask "Who leads the Beacon team?" --mode vector
-python graphrag.py ask "Who leads the Beacon team?" --mode graph
-python graphrag.py ask "Who leads the Beacon team?" --mode wiki
-
-# 4. compare all three on the full question set
-python graphrag.py bench --retrieval-only    # fast: retrieval speed and evidence recall only
-python graphrag.py bench                     # full: answers, accuracy, latency, tokens (10-15 min)
-```
-
-Add `--show-context` to any `ask` to see what was retrieved, and `--timing` to see latency and token counts. Run `ask` with no question for interactive mode.
-
-Extractions are cached in `index/extractions.json`, so rerunning `index` after a crash or after adding one file only processes what's new.
+To try a different approach to one step, like a new chunking strategy, edit that step's file. Everything else stays the same. (The chunking file is `chunking.py`, not `chunk.py`, because Python's standard library already has a `chunk` module and Jupyter can load that one instead.)
 
 ## Chunking methods
 
@@ -94,8 +107,8 @@ How documents get split affects everything after it: what the LLM extracts, what
 | Method | What it does | Trade-off |
 | --- | --- | --- |
 | `paragraph` (default) | Packs whole paragraphs into chunks up to `CHUNK_CHARS` | Headings can end up as tiny chunks of their own, which produce junk entities |
-| `fixed` (level 1) | Fixed windows of `CHUNK_CHARS`, each repeating the last `CHUNK_OVERLAP` characters of the previous one. Cut points snap to spaces so words stay whole. | The industry baseline. Facts near a boundary survive because of the overlap, but sentences get cut and the overlap gets extracted twice. |
-| `structure` (level 2) | Splits by Markdown headings, then paragraphs, then sentences if a paragraph is too long. Every chunk starts with its heading path, like `Third-party vendors`. | Chunks carry their section's context and headings never stand alone. Depends on documents having structure. The heading path isn't counted toward `CHUNK_CHARS`. |
+| `fixed` | Fixed windows of `CHUNK_CHARS`, each repeating the last `CHUNK_OVERLAP` characters of the previous one. Cut points snap to spaces so words stay whole. | The common baseline approach. Facts near a boundary survive because of the overlap, but sentences get cut and the overlap gets extracted twice. |
+| `structure` | Splits by Markdown headings, then paragraphs, then sentences if a paragraph is too long. Every chunk starts with its heading path, like `Third-party vendors`. | Chunks carry their section's context and headings never stand alone. Depends on documents having structure. The heading path isn't counted toward `CHUNK_CHARS`. |
 
 Preview a method without calling the LLM:
 
@@ -115,9 +128,9 @@ INDEX_DIR=index_structure WIKI_DIR=wiki_structure python graphrag.py bench
 
 Each index saves how it was built in `index/meta.json`. Benchmark results record the chunking method, so the notebook's saved-run comparison can tell them apart. Section 10 of `testing/bench.ipynb` builds and benchmarks all three methods in one go.
 
-Changing the method or size changes the chunk text, so the first `index` with a new setting re-extracts. After that it's cached. The default `paragraph` method produces exactly the same chunks as before, so existing indexes stay valid.
+Changing the method or size changes the chunk text, so the first `index` with a new setting re-extracts. After that it's cached. The `paragraph` method's output is pinned by a test, so existing indexes and extraction caches stay valid.
 
-## The demo: multi-hop questions
+## The demo multi-hop questions
 
 The sample docs in `data/` describe a fictional company, with facts deliberately spread across three files. This question needs four facts from all three files (Priya leads Atlas → Atlas owns the payments API → the outage was caused by Redwood → Redwood is maintained by Juniper Labs):
 
@@ -198,7 +211,7 @@ Any model load that still happens is measured and subtracted from warm latency.
 | Context size (chars) | Prompt size without relying on Ollama's token count. |
 | Evidence recall | Share of the source files needed for the answer that made it into the prompt. |
 | Accuracy (all / simple / multi-hop) | Whether the answer mentions the expected answer. |
-| Correct per 1k prompt tokens | Accuracy per unit of context, a simple version of the design doc's Utility / TokenCost. |
+| Correct per 1k prompt tokens | Accuracy per unit of context: how much useful answer each token of context buys. |
 | Answer stability | Share of questions where every run agreed on right or wrong. |
 | Cold calls | Queries where Ollama had to load a model first. Should be 0. If not, Ollama is swapping models because of memory. |
 | Order effect | Warm latency when a mode ran first minus when it ran last, compared within each question. Near 0 means run order isn't skewing results. |
@@ -217,7 +230,6 @@ Everything test-related lives in `testing/`.
 ### Unit tests (pytest)
 
 ```bash
-pip install pytest
 python -m pytest testing          # from the project folder; about a second
 python -m pytest testing -k okf   # just the wiki tests
 ```
@@ -290,7 +302,7 @@ The file for each step is in parentheses.
 4. Pack pages greedily into `--budget` tokens (estimated as characters / 4), skipping relation lines an earlier page already added.
 5. Give only those compact pages to the LLM.
 
-This is a small version of the design doc's constrained optimization: maximize utility within a fixed context budget, with a redundancy penalty.
+This treats retrieval as a small budgeting problem: get the most useful context into a fixed number of tokens, without paying twice for the same fact.
 
 ## Options
 
@@ -324,15 +336,9 @@ PDFs aren't supported yet. Convert them to text first.
 - **"Can't reach Ollama"**: the Ollama app isn't running. Open it, or run `ollama serve`.
 - **"model not found"**: you haven't pulled that model yet. Run the `ollama pull` commands above.
 - **"No wiki in wiki/"**: run `python graphrag.py export-okf`. In the notebook, also check that `os.getcwd()` is the project folder.
-- **`No module named 'yaml'`**: run `pip install -r requirements.txt` again (it now includes `pyyaml`).
+- **`No module named 'yaml'`**: run `pip install -r requirements.txt` again (it includes `pyyaml`).
 - **Notebook doesn't see new code**: restart the kernel.
 - **`No module named 'testing'`** when running the notebook: run the Setup cell first; it switches to the project folder.
 - **Cold calls aren't 0, or the warm-up warns that the embed model reloaded**: your machine can't hold both models at once. Use a smaller `CHAT_MODEL`, or set `OLLAMA_MAX_LOADED_MODELS=2` before starting Ollama.
 - **Graph has very few relations**: the chat model is struggling with extraction. Try a larger model.
 - **Changed models and want fresh extractions**: the cache is keyed by model name, so this happens automatically. To force a full rebuild, delete the `index/` folder.
-
-- **A verification gate** between extraction and graph building, so unsupported claims never reach the wiki.
-- **Attributed claims:** store facts as claims with a source and a confidence score instead of bare edges.
-- **Entity merging:** act on the duplicates `log.md` already flags.
-- **A wiki you can edit:** make the wiki the source of truth instead of regenerating it, so human fixes stick.
-- **Context packs:** cache the pages wiki mode selects for common questions.
