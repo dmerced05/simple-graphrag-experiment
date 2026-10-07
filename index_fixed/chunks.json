@@ -1,0 +1,50 @@
+[
+ {
+  "id": "incidents#0",
+  "source": "incidents.md",
+  "text": "# Incident log, spring quarter On March 14, the payments API went down for three hours. The root cause was a memory leak in the Redwood caching library, which the payments API uses to store session",
+  "method": "fixed"
+ },
+ {
+  "id": "incidents#1",
+  "source": "incidents.md",
+  "text": "which the payments API uses to store session data. On April 2, the shipment tracking dashboard showed stale data for twenty minutes after a misconfigured deploy. No third-party library was at fault.",
+  "method": "fixed"
+ },
+ {
+  "id": "incidents#2",
+  "source": "incidents.md",
+  "text": "deploy. No third-party library was at fault. After the March outage, Dana Okafor asked every team to review its third-party dependencies.",
+  "method": "fixed"
+ },
+ {
+  "id": "team#0",
+  "source": "team.md",
+  "text": "# Engineering teams at Northwind Freight Priya Raman leads the Atlas team. Atlas owns the payments API, which handles every customer invoice and refund. Marcus Chen leads the Beacon team. Beacon",
+  "method": "fixed"
+ },
+ {
+  "id": "team#1",
+  "source": "team.md",
+  "text": "refund. Marcus Chen leads the Beacon team. Beacon builds the shipment tracking dashboard used by warehouse staff. Both team leads report to Dana Okafor, the VP of Engineering, who joined Northwind",
+  "method": "fixed"
+ },
+ {
+  "id": "team#2",
+  "source": "team.md",
+  "text": "the VP of Engineering, who joined Northwind Freight in 2023.",
+  "method": "fixed"
+ },
+ {
+  "id": "vendors#0",
+  "source": "vendors.md",
+  "text": "# Third-party vendors Redwood is a caching library maintained by Juniper Labs, a small vendor based in Portland, Oregon. The shipment tracking dashboard uses Brightline Charts, a charting library",
+  "method": "fixed"
+ },
+ {
+  "id": "vendors#1",
+  "source": "vendors.md",
+  "text": "uses Brightline Charts, a charting library made by Halcyon Software. Juniper Labs released a patch for the Redwood memory leak on March 20.",
+  "method": "fixed"
+ }
+]

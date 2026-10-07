@@ -1,0 +1,8 @@
+{
+ "chunk_method": "structure",
+ "chunk_chars": 200,
+ "chunk_overlap": null,
+ "chunk_count": 8,
+ "chat_model": "qwen2.5:7b",
+ "embed_model": "nomic-embed-text"
+}

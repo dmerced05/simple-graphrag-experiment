@@ -1,0 +1,50 @@
+[
+ {
+  "id": "incidents#0",
+  "source": "incidents.md",
+  "text": "Incident log, spring quarter\n\nOn March 14, the payments API went down for three hours. The root cause was a memory leak in the Redwood caching library, which the payments API uses to store session data.",
+  "method": "structure"
+ },
+ {
+  "id": "incidents#1",
+  "source": "incidents.md",
+  "text": "Incident log, spring quarter\n\nOn April 2, the shipment tracking dashboard showed stale data for twenty minutes after a misconfigured deploy. No third-party library was at fault.",
+  "method": "structure"
+ },
+ {
+  "id": "incidents#2",
+  "source": "incidents.md",
+  "text": "Incident log, spring quarter\n\nAfter the March outage, Dana Okafor asked every team to review its third-party dependencies.",
+  "method": "structure"
+ },
+ {
+  "id": "team#0",
+  "source": "team.md",
+  "text": "Engineering teams at Northwind Freight\n\nPriya Raman leads the Atlas team. Atlas owns the payments API, which handles every customer invoice and refund.",
+  "method": "structure"
+ },
+ {
+  "id": "team#1",
+  "source": "team.md",
+  "text": "Engineering teams at Northwind Freight\n\nMarcus Chen leads the Beacon team. Beacon builds the shipment tracking dashboard used by warehouse staff.",
+  "method": "structure"
+ },
+ {
+  "id": "team#2",
+  "source": "team.md",
+  "text": "Engineering teams at Northwind Freight\n\nBoth team leads report to Dana Okafor, the VP of Engineering, who joined Northwind Freight in 2023.",
+  "method": "structure"
+ },
+ {
+  "id": "vendors#0",
+  "source": "vendors.md",
+  "text": "Third-party vendors\n\nRedwood is a caching library maintained by Juniper Labs, a small vendor based in Portland, Oregon.\n\nThe shipment tracking dashboard uses Brightline Charts, a charting library made by Halcyon Software.",
+  "method": "structure"
+ },
+ {
+  "id": "vendors#1",
+  "source": "vendors.md",
+  "text": "Third-party vendors\n\nJuniper Labs released a patch for the Redwood memory leak on March 20.",
+  "method": "structure"
+ }
+]

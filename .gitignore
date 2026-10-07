@@ -1,0 +1,19 @@
+# Python environment and caches
+.venv/
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ipynb_checkpoints/
+
+# editor / OS
+.vscode/
+.DS_Store
+
+# generated outputs. kept in git by default, since they're small and let people try the demo without
+# re-running extraction. uncomment to leave them out:
+# index/
+# wiki/
+# index_*/
+# wiki_*/
+# testing/benchmark/results/

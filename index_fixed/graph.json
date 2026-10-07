@@ -1,0 +1,437 @@
+{
+ "nodes": [
+  {
+   "key": "payments api",
+   "name": "payments API",
+   "type": "system",
+   "descriptions": [
+    "A system that went down for three hours.",
+    "a system used for storing session data",
+    "A product owned by the Atlas team."
+   ],
+   "chunks": [
+    "incidents#0",
+    "incidents#1",
+    "team#0"
+   ]
+  },
+  {
+   "key": "redwood caching library",
+   "name": "Redwood caching library",
+   "type": "system",
+   "descriptions": [
+    "A library that caused a memory leak."
+   ],
+   "chunks": [
+    "incidents#0"
+   ]
+  },
+  {
+   "key": "march 14",
+   "name": "March 14",
+   "type": "other",
+   "descriptions": [
+    "The date when the incident occurred."
+   ],
+   "chunks": [
+    "incidents#0"
+   ]
+  },
+  {
+   "key": "shipment tracking dashboard",
+   "name": "shipment tracking dashboard",
+   "type": "system",
+   "descriptions": [
+    "a system used for showing shipment data",
+    "built by Beacon team",
+    "uses Brightline Charts"
+   ],
+   "chunks": [
+    "incidents#1",
+    "team#1",
+    "vendors#0"
+   ]
+  },
+  {
+   "key": "april 2",
+   "name": "April 2",
+   "type": "other",
+   "descriptions": [
+    "a date when an issue occurred"
+   ],
+   "chunks": [
+    "incidents#1"
+   ]
+  },
+  {
+   "key": "stale data",
+   "name": "stale data",
+   "type": "other",
+   "descriptions": [],
+   "chunks": [
+    "incidents#1"
+   ]
+  },
+  {
+   "key": "to store session data",
+   "name": "to store session data",
+   "type": "other",
+   "descriptions": [],
+   "chunks": [
+    "incidents#1"
+   ]
+  },
+  {
+   "key": "march outage",
+   "name": "March outage",
+   "type": "event",
+   "descriptions": [
+    "a service disruption in March"
+   ],
+   "chunks": [
+    "incidents#2"
+   ]
+  },
+  {
+   "key": "dana okafor",
+   "name": "Dana Okafor",
+   "type": "person",
+   "descriptions": [
+    "a person who asked teams to review third-party dependencies",
+    "VP of Engineering and reports to"
+   ],
+   "chunks": [
+    "incidents#2",
+    "team#1"
+   ]
+  },
+  {
+   "key": "every team",
+   "name": "every team",
+   "type": "team",
+   "descriptions": [
+    "teams asked to review third-party dependencies"
+   ],
+   "chunks": [
+    "incidents#2"
+   ]
+  },
+  {
+   "key": "its third party dependencies",
+   "name": "its third-party dependencies",
+   "type": "other",
+   "descriptions": [],
+   "chunks": [
+    "incidents#2"
+   ]
+  },
+  {
+   "key": "northwind freight",
+   "name": "Northwind Freight",
+   "type": "organization",
+   "descriptions": [
+    "A company with engineering teams.",
+    "A company where the VP of Engineering works"
+   ],
+   "chunks": [
+    "team#0",
+    "team#2"
+   ]
+  },
+  {
+   "key": "atlas team",
+   "name": "Atlas team",
+   "type": "team",
+   "descriptions": [
+    "A team led by Priya Raman."
+   ],
+   "chunks": [
+    "team#0"
+   ]
+  },
+  {
+   "key": "beacon team",
+   "name": "Beacon team",
+   "type": "team",
+   "descriptions": [
+    "A team led by Marcus Chen."
+   ],
+   "chunks": [
+    "team#0"
+   ]
+  },
+  {
+   "key": "priya raman",
+   "name": "Priya Raman",
+   "type": "person",
+   "descriptions": [
+    "Leads the Atlas team."
+   ],
+   "chunks": [
+    "team#0"
+   ]
+  },
+  {
+   "key": "marcus chen",
+   "name": "Marcus Chen",
+   "type": "person",
+   "descriptions": [
+    "Leads the Beacon team.",
+    "leads the Beacon team"
+   ],
+   "chunks": [
+    "team#0",
+    "team#1"
+   ]
+  },
+  {
+   "key": "beacon",
+   "name": "Beacon",
+   "type": "team",
+   "descriptions": [
+    "builds the shipment tracking dashboard used by warehouse staff"
+   ],
+   "chunks": [
+    "team#1"
+   ]
+  },
+  {
+   "key": "warehouse staff",
+   "name": "warehouse staff",
+   "type": "other",
+   "descriptions": [
+    "use the shipment tracking dashboard"
+   ],
+   "chunks": [
+    "team#1"
+   ]
+  },
+  {
+   "key": "northwind",
+   "name": "Northwind",
+   "type": "organization",
+   "descriptions": [
+    "Dana Okafor joined"
+   ],
+   "chunks": [
+    "team#1"
+   ]
+  },
+  {
+   "key": "vp of engineering",
+   "name": "VP of Engineering",
+   "type": "person",
+   "descriptions": [
+    "The Vice President of Engineering at Northwind Freight"
+   ],
+   "chunks": [
+    "team#2"
+   ]
+  },
+  {
+   "key": "redwood",
+   "name": "Redwood",
+   "type": "product",
+   "descriptions": [
+    "a caching library",
+    "had a memory leak"
+   ],
+   "chunks": [
+    "vendors#0",
+    "vendors#1"
+   ]
+  },
+  {
+   "key": "juniper labs",
+   "name": "Juniper Labs",
+   "type": "organization",
+   "descriptions": [
+    "maintains Redwood",
+    "released a patch"
+   ],
+   "chunks": [
+    "vendors#0",
+    "vendors#1"
+   ]
+  },
+  {
+   "key": "portland",
+   "name": "Portland",
+   "type": "place",
+   "descriptions": [
+    "based in Portland, Oregon"
+   ],
+   "chunks": [
+    "vendors#0"
+   ]
+  },
+  {
+   "key": "brightline charts",
+   "name": "Brightline Charts",
+   "type": "product",
+   "descriptions": [
+    "a charting library"
+   ],
+   "chunks": [
+    "vendors#0",
+    "vendors#1"
+   ]
+  },
+  {
+   "key": "halcyon software",
+   "name": "Halcyon Software",
+   "type": "organization",
+   "descriptions": [
+    "made Brightline Charts"
+   ],
+   "chunks": [
+    "vendors#1"
+   ]
+  },
+  {
+   "key": "march 20",
+   "name": "March 20",
+   "type": "other",
+   "descriptions": [
+    "date of the patch release"
+   ],
+   "chunks": [
+    "vendors#1"
+   ]
+  },
+  {
+   "key": "a patch",
+   "name": "a patch",
+   "type": "other",
+   "descriptions": [],
+   "chunks": [
+    "vendors#1"
+   ]
+  },
+  {
+   "key": "a memory leak",
+   "name": "a memory leak",
+   "type": "other",
+   "descriptions": [],
+   "chunks": [
+    "vendors#1"
+   ]
+  }
+ ],
+ "edges": [
+  {
+   "source": "payments api",
+   "target": "march 14",
+   "relation": "went down",
+   "chunk": "incidents#0"
+  },
+  {
+   "source": "payments api",
+   "target": "to store session data",
+   "relation": "uses",
+   "chunk": "incidents#1"
+  },
+  {
+   "source": "redwood caching library",
+   "target": "payments api",
+   "relation": "caused",
+   "chunk": "incidents#0"
+  },
+  {
+   "source": "shipment tracking dashboard",
+   "target": "stale data",
+   "relation": "showed",
+   "chunk": "incidents#1"
+  },
+  {
+   "source": "shipment tracking dashboard",
+   "target": "warehouse staff",
+   "relation": "used by",
+   "chunk": "team#1"
+  },
+  {
+   "source": "april 2",
+   "target": "shipment tracking dashboard",
+   "relation": "occurred on",
+   "chunk": "incidents#1"
+  },
+  {
+   "source": "dana okafor",
+   "target": "every team",
+   "relation": "asked",
+   "chunk": "incidents#2"
+  },
+  {
+   "source": "dana okafor",
+   "target": "northwind",
+   "relation": "reports to",
+   "chunk": "team#1"
+  },
+  {
+   "source": "every team",
+   "target": "its third party dependencies",
+   "relation": "reviewed",
+   "chunk": "incidents#2"
+  },
+  {
+   "source": "atlas team",
+   "target": "payments api",
+   "relation": "owns",
+   "chunk": "team#0"
+  },
+  {
+   "source": "priya raman",
+   "target": "atlas team",
+   "relation": "leads",
+   "chunk": "team#0"
+  },
+  {
+   "source": "marcus chen",
+   "target": "beacon team",
+   "relation": "leads",
+   "chunk": "team#0"
+  },
+  {
+   "source": "marcus chen",
+   "target": "beacon",
+   "relation": "leads",
+   "chunk": "team#1"
+  },
+  {
+   "source": "beacon",
+   "target": "shipment tracking dashboard",
+   "relation": "builds",
+   "chunk": "team#1"
+  },
+  {
+   "source": "vp of engineering",
+   "target": "northwind freight",
+   "relation": "joined",
+   "chunk": "team#2"
+  },
+  {
+   "source": "redwood",
+   "target": "juniper labs",
+   "relation": "maintained by",
+   "chunk": "vendors#0"
+  },
+  {
+   "source": "redwood",
+   "target": "a memory leak",
+   "relation": "had",
+   "chunk": "vendors#1"
+  },
+  {
+   "source": "juniper labs",
+   "target": "portland",
+   "relation": "based in",
+   "chunk": "vendors#0"
+  },
+  {
+   "source": "juniper labs",
+   "target": "a patch",
+   "relation": "released",
+   "chunk": "vendors#1"
+  }
+ ]
+}

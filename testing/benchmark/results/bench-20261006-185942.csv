@@ -1,0 +1,26 @@
+run,mode,order,id,type,embed_ms,retrieve_ms,llm_ms,total_ms,warm_ms,load_ms,embed_load_ms,prompt_eval_ms,generate_ms,prompt_tokens,output_tokens,context_chars,cold,evidence_recall,facts,passages,correct,answer
+1,wiki,1,beacon-lead,simple,11.396667105145752,0.5294999573379755,1475.3572919871658,1487.3082080157474,1483.6755410157475,1.924417,1.70825,604.82,865.448,148,19,266,False,1.0,2,0,True,"According to the information provided in [team#1], Marcus Chen leads the Beacon team."
+1,wiki,1,outage-date,simple,12.215417111292481,0.38195797242224216,1543.6557079665363,1556.290499982424,1552.4333329824242,2.259333,1.597834,600.21,934.702,178,21,348,False,1.0,5,0,True,"The payments API went down on March 14, as stated in [incidents#1]."
+1,wiki,1,redwood-vendor,simple,11.176166008226573,0.3682090900838375,1832.7834999654442,1844.3467080360278,1841.1177920360278,1.644291,1.584625,455.057,1371.737,162,30,286,False,1.0,3,0,True,"According to the passage [vendors#0], Redwood is maintained by Juniper Labs. Therefore, Juniper Labs maintains the Redwood library."
+1,wiki,1,payments-boss,multi-hop,13.491000048816204,0.27537508867681026,2104.1909579653293,2117.975707980804,2114.786873980804,1.575834,1.613,164.296,1934.156,185,42,348,False,1.0,5,0,False,"The information provided does not specify who the leader of the Atlas team reports to. Therefore, I don't know the answer based on the given passages. [team#0] [incidents#1]"
+1,wiki,1,fix-date,multi-hop,13.141167000867426,0.4354590782895684,2564.0154170105234,2577.615207992494,2572.084874992494,3.652875,1.877458,164.616,2392.52,185,52,348,False,0.5,5,0,False,"The provided information does not specify when the fix was released for the problem that took down the payments API. Therefore, I don't know the exact date of the fix release based on the given passages.
+
+[incidents#1] [team#0]"
+1,wiki,1,chart-maker,multi-hop,12.885125004686415,0.42037502862513065,3970.063833054155,3983.391624991782,3979.731708991782,1.806,1.853916,165.984,3794.639,171,82,305,False,1.0,3,0,True,"To answer the question, let's chain the facts together:
+
+1. Marcus Chen leads the Beacon team [team#1].
+2. The shipment tracking dashboard uses Brightline Charts [vendors#1].
+3. Brightline Charts are made by Halcyon Software [vendors#1].
+
+Therefore, the company that makes the charting library used by Marcus Chen's team's dashboard is Halcyon Software."
+1,wiki,1,outage-vendor,multi-hop,12.67558301333338,0.5070409970358014,7102.9231660068035,7116.143624996766,7112.115749996767,1.954125,2.07375,605.191,6488.299,178,139,280,False,0.6666666666666666,3,0,True,"Based on the provided information, we can chain the facts as follows:
+
+1. Priya Raman leads the Atlas team [team#0].
+2. Redwood is a product with a memory leak [vendors#0].
+3. Redwood is maintained by Juniper Labs [vendors#0].
+4. Juniper Labs released a patch for Redwood [vendors#1].
+
+From these facts, we can infer that Redwood is the library that caused the outage in the system Priya Raman's team owns, and it is maintained by Juniper Labs.
+
+Therefore, the vendor that maintains the library causing the outage is Juniper Labs. [vendors#0, vendors#1]"
+1,wiki,1,vendor-city,multi-hop,24.692084058187902,0.5198329454287887,2612.8744579618797,2638.1100839935243,2630.4158339935243,4.1515,3.54275,172.863,2421.422,165,53,275,False,1.0,2,0,True,"The vendor behind the March outage is based in Portland, Oregon. This can be deduced from the fact that Juniper Labs, which is based in Portland [vendors#0], is likely the vendor experiencing the service disruption in March [March outage#1]."

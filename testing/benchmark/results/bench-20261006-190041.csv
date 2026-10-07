@@ -1,0 +1,39 @@
+run,mode,order,id,type,embed_ms,retrieve_ms,llm_ms,total_ms,warm_ms,load_ms,embed_load_ms,prompt_eval_ms,generate_ms,prompt_tokens,output_tokens,context_chars,cold,evidence_recall,facts,passages,correct,answer
+1,wiki,1,beacon-lead,simple,11.148332967422903,0.5737920291721821,1223.2006249250844,1234.9477499956265,1231.5417919956267,1.819458,1.5865,469.235,745.378,308,17,870,False,1.0,8,0,True,"According to the passage [team#1], Marcus Chen leads the Beacon team."
+1,wiki,1,outage-date,simple,10.53520804271102,0.21116703283041716,1574.6360420016572,1585.396083071828,1582.503541071828,1.587292,1.30525,630.615,935.808,311,21,870,False,1.0,7,0,True,"The payments API went down on March 14 [incidents#1, team#0]."
+1,wiki,1,redwood-vendor,simple,11.688208905979991,0.5765419919043779,1303.388874977827,1315.6732500065118,1311.9495410065117,1.574209,2.1495,631.325,664.522,313,15,892,False,1.0,8,0,True,Juniper Labs maintains the Redwood library. [vendors#0]
+1,wiki,1,payments-boss,multi-hop,11.511457967571914,0.1029579434543848,5032.609208021313,5044.231542036869,5040.222666036869,2.030084,1.978792,631.948,4390.97,323,95,928,False,1.0,9,0,True,"The leader of the team that owns the payments API reports to Dana Okafor. This can be deduced by the following chain of facts:
+
+1. The payments API is owned by the Atlas team [team#0].
+2. Dana Okafor asks every team to review their dependencies [incidents#3].
+3. Every team reports to Dana Okafor [team#2].
+
+Therefore, the leader of the Atlas team reports to Dana Okafor."
+1,wiki,1,fix-date,multi-hop,12.558666989207268,0.36408298183232546,5462.669749977067,5475.612291949801,5472.147499949801,1.808375,1.656417,647.442,4806.703,318,104,870,False,1.0,7,0,True,"The fix was released on March 20. This can be inferred by chaining the following facts:
+
+1. The payments API went down on March 14 [incidents#1].
+2. The issue was related to the Redwood caching library, which had a memory leak [incidents#1].
+3. A patch was released on March 20 [March 20 (other)].
+
+Therefore, the fix for the problem that took down the payments API was released on March 20."
+1,wiki,1,chart-maker,multi-hop,15.089416992850602,0.4440000047907233,6364.364417036995,6379.917834070511,6375.181001070511,1.92225,2.814583,645.821,5707.479,293,123,891,False,1.0,6,0,True,"To answer the question, we need to chain the following facts together:
+
+1. Marcus Chen leads the Beacon team [team#1].
+2. Beacon builds the shipment tracking dashboard [team#1].
+3. The shipment tracking dashboard uses Brightline Charts [vendors#1].
+4. Brightline Charts are made by Halcyon Software [vendors#1].
+
+From these facts, we can conclude that Halcyon Software makes the charting library (Brightline Charts) used by Marcus Chen's team's dashboard.
+
+Therefore, the answer is Halcyon Software. [vendors#1, team#1]"
+1,wiki,1,outage-vendor,multi-hop,13.635874958708882,0.5272079724818468,8562.014875002205,8576.236916938797,8572.039124938798,2.094167,2.103625,803.917,7730.073,338,151,932,False,1.0,9,0,True,"To answer this question, let's chain the facts together:
+
+1. The Atlas team owns the payments API [team#0].
+2. The payments API went down on March 14 [incidents#1].
+3. The Redwood caching library is used by the payments API [incidents#1].
+4. Redwood caching library has a memory leak [incidents#1].
+5. Redwood is maintained by Juniper Labs [vendors#0].
+6. Juniper Labs released a patch for Redwood [vendors#1].
+
+From these facts, we can conclude that the vendor maintaining the library that caused the outage in the system Priya Raman's team owns is Juniper Labs [vendors#0, vendors#1]."
+1,wiki,1,vendor-city,multi-hop,37.31195896398276,0.9824580047279596,1762.6375410472974,1800.9847500361502,1782.8612920361502,3.534,14.589458,684.452,1038.856,310,19,908,False,1.0,8,0,True,"The vendor behind the March outage is based in Portland, Oregon. [vendors#0]"
