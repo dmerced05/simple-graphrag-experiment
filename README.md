@@ -63,7 +63,7 @@ The same questions are answered three ways:
 | `graph` | Facts from walking a knowledge graph of extracted entities and relations, plus the source chunks they came from |
 | `wiki` | Pages from a Markdown wiki compiled from the graph in the [Open Knowledge Format](https://github.com/GoogleCloudPlatform/knowledge-catalog/tree/main/okf), packed into a fixed token budget, with no raw text |
 
-The sample corpus is tiny (three short files about a fictional company), so the results are directional, not conclusions. The goal is understanding the trade-offs, not producing a production system.
+The sample corpus is tiny (three short files about a fictional company), so the results are directional, not conclusions.
 
 ## Project files
 
@@ -98,7 +98,7 @@ index/                 # built by `index`: graph, chunks, embeddings, extraction
 wiki/                  # built by `index` / `export-okf`: the OKF wiki
 ```
 
-To try a different approach to one step, like a new chunking strategy, edit that step's file. Everything else stays the same. (The chunking file is `chunking.py`, not `chunk.py`, because Python's standard library already has a `chunk` module and Jupyter can load that one instead.)
+To try a different approach to one step, like a new chunking strategy, edit that step's file. Everything else should stay the same. (The chunking file is `chunking.py`, not `chunk.py`, because Python's standard library already has a `chunk` module and Jupyter can load that one instead.)
 
 ## Chunking methods
 
@@ -151,7 +151,7 @@ More questions to try (all are in `testing/benchmark/questions.json`):
 | When was the fix released for the problem that took down the payments API? | March 20 | Multi-hop |
 | Which company makes the charting library used by Marcus Chen's team's dashboard? | Halcyon Software | Multi-hop |
 
-Results vary between runs and models, since small models extract imperfectly. That's part of what the demo shows.
+Results vary between runs and models, since small models extract imperfectly.
 
 ## The OKF wiki
 
@@ -216,12 +216,12 @@ Any model load that still happens is measured and subtracted from warm latency.
 | Cold calls | Queries where Ollama had to load a model first. Should be 0. If not, Ollama is swapping models because of memory. |
 | Order effect | Warm latency when a mode ran first minus when it ran last, compared within each question. Near 0 means run order isn't skewing results. |
 
-To add questions, append to `testing/benchmark/questions.json` with the accepted `answers` and the `sources` (file names without extension) the answer depends on. Accuracy is a substring match, so an answer like "not Juniper Labs" would still count as correct. Treat it as a quick signal, not a grade.
+To add questions, append to `testing/benchmark/questions.json` with the accepted `answers` and the `sources` (file names without extension) the answer depends on. Accuracy is a substring match, so an answer like "not Juniper Labs" would still count as correct.
 
 Two caveats when reading results:
 
 - **Prompt cache:** Ollama's prompt cache can make prompt reading much faster when consecutive prompts start the same way. This mostly helps graph mode. Token counts aren't affected.
-- **Tiny corpus:** with only 9 chunks, results are directional, not hard numbers.
+- **Tiny corpus:** with only 9 chunks, results are directional.
 
 ## Testing
 
